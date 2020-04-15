@@ -1,1 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
+
+@import "../node_modules/angular-calendar/css/angular-calendar.css";
+/*@import '~bootstrap/dist/css/bootstrap.css';
+@import "~bootstrap/scss/bootstrap";*/
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+tr.mat-header-row {
+  height: 30px !important;
+
+}
+tr.mat-footer-row,
+tr.mat-row {
+  border: 1px solid #e7e7e7;
+  height: 30px !important;
+}

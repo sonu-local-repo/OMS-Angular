@@ -1,0 +1,72 @@
+
+<ngx-spinner></ngx-spinner>
+<div class="custom-table-container" >
+  <div fxLayout="row" class ="search-bar" >
+    <mat-form-field appearance="legacy" class="mat-search">
+      <mat-label>Search....</mat-label>
+      <input matInput  #searchRef>
+    </mat-form-field>
+    <button class="btn-opty-create"mat-button color="accent" fxLayoutAlign="center center">Create Opportunity</button>
+  </div>
+  <table mat-table [dataSource]="opportunityList" class="custom-table" matSort matSortActive="id" matSortDisableClear
+         matSortDirection="desc">
+
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+      <td  mat-cell *matCellDef="let opty" class="navigation" (click)="navigateTo(opty)">{{opty.id}}</td>
+    </ng-container>
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>NAME</th>
+          <td mat-cell *matCellDef="let opty">{{opty.type}} {{opty.name}}</td>
+        </ng-container>
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>STATUS</th>
+          <td mat-cell *matCellDef="let opty">{{opty.status}}</td>
+        </ng-container>
+        <ng-container matColumnDef="source">
+          <th mat-header-cell *matHeaderCellDef fxHide fxShow.gt-xs>SOURCE</th>
+          <td mat-cell *matCellDef="let opty" fxHide fxShow.gt-xs>{{opty.source}}</td>
+        </ng-container>
+        <ng-container matColumnDef="dueDate">
+          <th mat-header-cell *matHeaderCellDef fxHide fxShow.gt-xs>DUE DATE</th>
+          <td mat-cell *matCellDef="let opty" fxHide fxShow.gt-xs>{{opty.dueDate|date }}</td>
+        </ng-container>
+        <ng-container matColumnDef="priority">
+          <th mat-header-cell *matHeaderCellDef fxHide fxShow.gt-xs>PRIORITY</th>
+          <td mat-cell *matCellDef="let opty" fxHide fxShow.gt-xs>{{opty.priority}}</td>
+        </ng-container>
+        <ng-container matColumnDef="type">
+          <th mat-header-cell *matHeaderCellDef fxHide fxShow.gt-xs>TYPE</th>
+          <td mat-cell *matCellDef="let opty" fxHide fxShow.gt-xs>{{opty.type}}</td>
+        </ng-container>
+        <ng-container matColumnDef="createdAt">
+          <th mat-header-cell *matHeaderCellDef fxHide fxShow.gt-xs>CREATED DATE</th>
+          <td mat-cell *matCellDef="let opty" fxHide fxShow.gt-xs>{{opty.createdAt | date}}</td>
+        </ng-container>
+
+
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef></th>
+          <td mat-cell *matCellDef="let opty" class="order-action">
+            <button mat-button (click)="navigateTo(opty.id)" matTooltip="View" class="table-action">
+                        <mat-icon>visibility </mat-icon>
+            </button>
+
+          </td>
+        </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true">
+    </tr>
+    <tr mat-row class="order-row" *matRowDef="let row; columns: displayedColumns;">
+    </tr>
+  </table>
+
+    <mat-paginator [length]="length"
+                   [pageSize]="pageSize"
+                   showFirstLastButtons
+                   [pageSizeOptions]="pageSizeOptions"
+    >
+    </mat-paginator>
+
+</div>
+

@@ -1,0 +1,141 @@
+<ngx-spinner></ngx-spinner>
+<mat-card fxLayout="row" class="profile-summary-card order-card" *ngIf="opportunityDetails">
+  <div fxFlex="49" class="profile-snap-left">
+    <ul class="profile-snap-list">
+      <li>
+        <mat-icon class="profile-snap-icon">shopping_basket</mat-icon>
+        <div class="title mat-body-strong">Order #:</div>
+        <div class="text mat-body-strong">{{ opportunityDetails?.id }}</div>
+      </li>
+      <li>
+        <mat-icon class="profile-snap-icon">style</mat-icon>
+        <div class="title mat-body-strong">Item:</div>
+        <div class="text mat-body-strong">
+          {{ opportunityDetails?.type }}
+        </div>
+      </li>
+      <li>
+        <mat-icon class="profile-snap-icon">calendar_today</mat-icon>
+        <div class="title mat-body-strong">Order Date:</div>
+        <div class="text mat-body-strong">
+          {{ opportunityDetails?.createdAt | date }}
+        </div>
+      </li>
+      <li>
+        <mat-icon class="profile-snap-icon">emoji_flags</mat-icon>
+        <div class="title mat-body-strong">Status:</div>
+        <div class="order-status__created">{{ opportunityDetails?.status }}</div>
+      </li>
+    </ul>
+  </div>
+  <div fxFlex="49" class="profile-snap-right">
+    <div fxLayout="row">
+      <ul class="profile-snap-list">
+        <li>
+          <mat-icon class="profile-snap-icon">person</mat-icon>
+          <div class="title mat-body-strong">Customer Name:</div>
+          <div class="text mat-body-strong">
+            {{ opportunityDetails?.name }}
+          </div>
+        </li>
+        <li>
+          <mat-icon class="profile-snap-icon">phone</mat-icon>
+          <div class="title mat-body-strong">Phone:</div>
+          <div class="text mat-body-strong">{{ opportunityDetails?.dueDate }}</div>
+        </li>
+        <li>
+          <mat-icon class="profile-snap-icon">email</mat-icon>
+          <div class="title mat-body-strong">E-Mail:</div>
+          <div class="text mat-body-strong">{{ opportunityDetails?.priority }}</div>
+        </li>
+      </ul>
+    </div>
+
+<!--    <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="20px">
+      <div fxLayout="column" fxLayoutAlign="end">
+        <button
+          mat-button
+          mat-raised-button
+          color="primary"
+
+
+        >
+          Process Order
+        </button>
+      </div>
+
+     &lt;!&ndash; <div fxLayout="column">
+        <button mat-button mat-raised-button color="primary" (click)="savePDF()">
+          Generate Summary
+        </button>
+      </div>&ndash;&gt;
+    </div>-->
+  </div>
+  <div
+    fxFlex="3"
+    class="profile-edit"
+
+  >
+    <button
+      mat-mini-fab
+      style="background-color: red;"
+
+      matTooltip="Edit"
+    >
+      <mat-icon>edit</mat-icon>
+    </button>
+  </div>
+</mat-card>
+
+
+
+
+<mat-tab-group *ngIf="opportunityDetails"  color="accent">
+  <mat-tab label="CONTACTS" color="red">
+
+    <ng-template matTabContent>
+      <app-opportunity-contact [opportunityDetails]="opportunityDetails"></app-opportunity-contact>
+    </ng-template>
+  </mat-tab>
+  <mat-tab label="QUOTES" >
+    <ng-template matTabContent>
+      <app-opportunity-quotes [opportunityId]="opportunityId"></app-opportunity-quotes>
+    </ng-template>
+  </mat-tab>
+  <mat-tab label="SCHEDULES" >
+    <ng-template matTabContent>
+      <app-opportunity-schedules [opportunityId]="opportunityId"></app-opportunity-schedules>
+    </ng-template>
+  </mat-tab>
+  <mat-tab label="ESTIMATES" >
+    <ng-template matTabContent>
+      <app-opportunity-estimates [opportunityId]="opportunityId"></app-opportunity-estimates>
+    </ng-template>
+  </mat-tab>
+  <mat-tab label="JOBS" >
+    <ng-template matTabContent>
+      <app-opportunity-jobs [opportunityId]="opportunityId"></app-opportunity-jobs>
+    </ng-template>
+  </mat-tab>
+
+  <mat-tab label="INVOICES" >
+    <ng-template matTabContent>
+      <app-opportunity-invoices [opportunityId]="opportunityId"></app-opportunity-invoices>
+    </ng-template>
+  </mat-tab>
+  <mat-tab label="ATTACHMENTS" >
+    <ng-template matTabContent>
+      <app-opportunity-attachments [opportunityId]="opportunityId"></app-opportunity-attachments>
+    </ng-template>
+  </mat-tab>
+  <mat-tab label="ACTIVITIES" >
+    <ng-template matTabContent>
+      <app-opportunity-activities [opportunityId]="opportunityId"></app-opportunity-activities>
+    </ng-template>
+  </mat-tab>
+  <mat-tab label="CALENDER" >
+    <ng-template matTabContent>
+      <app-opportunity-calender></app-opportunity-calender>
+    </ng-template>
+  </mat-tab>
+</mat-tab-group>

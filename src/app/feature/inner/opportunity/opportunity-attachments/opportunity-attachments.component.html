@@ -1,0 +1,56 @@
+
+<!--<input type="file"  (change)="fileUpload($event)">-->
+<!--<button mat-fab (click)="click()" color="accent">Upload</button>-->
+<!--
+<mat-card>
+  <div class="dropdiv"
+     (dragover)="onDragOver($event)" (drop)="onDropSuccess($event)">
+    <label class="custom-file-upload">
+      <input class="att-drop" (change)="onChange($event)" type="file"/>
+      Upload file...
+    </label>
+  </div>
+</mat-card>
+-->
+<div class="attachment">
+<div class="center">
+  <ngx-file-drop dropZoneLabel="Drop files here" (onFileDrop)="dropped($event)"
+                 (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)">
+    <ng-template ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
+      Drag the files here.........
+      <button type="button" (click)="openFileSelector()">Browse Files</button>
+    </ng-template>
+  </ngx-file-drop>
+  <div class="upload-table" fxLayout="row" fxLayoutAlign="center">
+    <table class="table">
+      <thead>
+      <tr>
+        <th>Name</th>
+      </tr>
+      </thead>
+      <tbody class="upload-name-style">
+      <tr *ngFor="let item of files; let i=index">
+        <td><strong>{{ item.relativePath }}</strong></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+<div fxLayout="row wrap"  class="att-card-wrapper"  >
+  <div *ngFor="let attachment of attachmentList">
+<mat-card class = "att-card" *ngIf="attachment.name" (click)="viewAttachment(attachment)">
+  <mat-card-header >
+    <div class="att-card-title">
+    <mat-card-subtitle class="att-card-title">{{attachment.name.substring(0,20)}}</mat-card-subtitle>
+    <mat-card-subtitle class="att-card-title">{{attachment.createdAt | date}}</mat-card-subtitle>
+    </div>
+  </mat-card-header>
+
+</mat-card>
+  </div>
+
+
+</div>
+</div>

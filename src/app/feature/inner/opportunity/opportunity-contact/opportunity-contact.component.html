@@ -1,0 +1,45 @@
+<div *ngIf="contatList" class="contact-table">
+<table mat-table [dataSource]="contatList" class="custom-table" matSort matSortActive="id" matSortDisableClear
+       matSortDirection="desc">
+
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+    <td  mat-cell *matCellDef="let contact" >{{contact.id}}</td>
+  </ng-container>
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>NAME</th>
+    <td mat-cell *matCellDef="let contact">{{contact.name}}</td>
+  </ng-container>
+
+   <ng-container matColumnDef="source">
+     <th mat-header-cell *matHeaderCellDef fxHide fxShow.gt-xs>PHONE</th>
+     <td mat-cell *matCellDef="let contact" fxHide fxShow.gt-xs>{{contact.phone}}</td>
+   </ng-container>
+   <ng-container matColumnDef="dueDate">
+     <th mat-header-cell *matHeaderCellDef fxHide fxShow.gt-xs>MOBILE</th>
+     <td mat-cell *matCellDef="let contact" fxHide fxShow.gt-xs>{{contact.mobile }}</td>
+   </ng-container>
+  <ng-container matColumnDef="priority">
+    <th mat-header-cell *matHeaderCellDef fxHide fxShow.gt-xs>EMAIL</th>
+    <td mat-cell *matCellDef="let contact" fxHide fxShow.gt-xs>{{contact.email}}</td>
+  </ng-container>
+   <ng-container matColumnDef="type">
+     <th mat-header-cell *matHeaderCellDef fxHide fxShow.gt-xs>ADDRESS</th>
+     <td mat-cell *matCellDef="let contact" fxHide fxShow.gt-xs>{{contact.addressValue}}</td>
+   </ng-container>
+
+  <ng-container matColumnDef="status">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>STATUS</th>
+    <td mat-cell *matCellDef="let contact">{{contact.status}}</td>
+  </ng-container>
+   <ng-container matColumnDef="createdAt">
+     <th mat-header-cell *matHeaderCellDef fxHide fxShow.gt-xs>CREATED DATE</th>
+     <td mat-cell *matCellDef="let contact" fxHide fxShow.gt-xs>{{contact.createdAt | date}}</td>
+   </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true">
+  </tr>
+  <tr mat-row class="order-row" *matRowDef="let row; columns: displayedColumns;">
+  </tr>
+</table>
+</div>

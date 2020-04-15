@@ -1,0 +1,112 @@
+<div fxLayoutAlign="center center">
+  <div fxFlex="1200px">
+    <form [formGroup]="form" width="1000px" novalidate>
+
+      <div fxLayout="column">
+        <div fxLayout="row" fxLayoutAlign="center center" class="heading">
+          <h1>INVOICE</h1>
+        </div>
+
+        <div fxLayout="row">
+          <div fxFlex="50">
+            <mat-card>
+              <span mdPrefix>Invoice #</span>
+              <input matInput id="invoice-number" ng-model="invoice.invoice_number" />
+            </mat-card>
+          </div>
+          <div fxFlex="50"  >
+            <img [hidden]="logoRemoved" id="company_logo" [src]="logoSrc" alt="your image" width="300" />
+            <div fxLayoutAlign="end center">
+              <div class="noPrint" [hidden]="printMode" >
+                <a (click)="editLogo()" href='#'>Edit Logo</a>
+                <a (click)="logoRemoved=!logoRemoved" id="remove_logo" href='#'>{{ logoRemoved ? 'Show' : 'Hide' }} logo</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <br>
+
+      <div fxLayout="row" >
+        <div fxFlex="50">
+          <label>{{ invoice.customer_info.name  }}</label>
+        </div>
+        <div fxFlex="50" fxLayoutAlign="end center" >
+          <label>{{ invoice.company_info.name  }}</label>
+        </div>
+      </div>
+
+      <br><br>
+      <hr>
+
+      <div fxLayout.xs="column" style="font-weight: bolder">
+        <div fxFlex="40">Name</div>
+   <!--     <div fxFlex="10">Unit</div>-->
+        <div fxFlex="10">Qty</div>
+        <div fxFlex="20">Cost</div>
+        <div fxFlex="20" style="text-align: right">Total</div>
+      </div>
+
+      <div formArrayName="invoiceItems" style="font-weight: bolder; text-align: center">
+        <div fxLayout.xs="column"
+             *ngFor="let item of invoiceItems.controls; let i=index; let odd=odd;" [formGroupName]="i"
+             [ngClass]="{odd_row: odd}">
+          <mat-card fxLayout="row" fxFlex="40">
+            <button  (click)="removeItem(item)">-</button> {{i + 1}}
+            <input class="form-control" matInput formControlName="name">
+          </mat-card>
+     <!--     <mat-card fxFlex="10">
+            <input class="form-control" matInput formControlName="unit">
+          </mat-card>-->
+          <mat-card mdInput fxFlex="10">
+            <input class="form-control" matInput type="number" formControlName="qty">
+          </mat-card>
+          <mat-card fxFlex="20">
+            <input class="form-control" matInput type="number" formControlName="cost">
+          </mat-card>
+          <mat-card fxFlex="20">
+            <input class="form-control right_placeholder" matInput  disabled value="{{ item.value.total | currency  }}">
+          </mat-card>
+
+        </div>
+      </div>
+      <div fxLayout="row">
+        <button  (click)="addItem()"mat-mini-fab color="accent" class="md-small"><mat-icon>plus_one</mat-icon></button>
+      </div>
+
+      <div fxLayout="row" >
+        <div fxFlex="50">
+        </div>
+        <div fxFlex="20">
+          <label>Sub total</label>
+        </div>
+        <div fxFlex="30">
+          <input class="form-control right_placeholder" matInput disabled value="{{ form.value.subTotal | currency  }}">
+        </div>
+      </div>
+
+      <div fxLayout="row">
+        <div fxFlex></div>
+        <mat-form-field fxFlex="20">
+          <input style="direction: rtl;"  matInput type="number" formControlName="taxPercent" placeholder="% tax">
+
+        </mat-form-field>
+        <mat-form-field fxFlex="20">
+          <input class="form-control right_placeholder" matInput disabled value="{{ form.value.tax | currency  }}">
+        </mat-form-field>
+      </div>
+
+      <div fxLayout="row" >
+        <div fxFlex="50">
+        </div>
+        <div fxFlex="20">
+          <label>Grant total</label>
+        </div>
+        <div fxFlex="30"  >
+          <input class="form-control right_placeholder" matInput disabled value="{{ form.value.grantTotal | currency  }}">
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

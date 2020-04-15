@@ -1,0 +1,108 @@
+<form [formGroup]="eventForm" style="width: 100%; min-width: 400px;">
+    <div fxLayout="column">
+        <div fxLayout="row" >
+            <mat-form-field fxFlex>
+              <mat-label>Title</mat-label>
+              <input matInput formControlName="title" />
+            </mat-form-field>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="space-between center">
+              <div fxLayout="column">
+
+
+                <mat-form-field>
+                  <input matInput [ngxMatDatetimePicker]="picker" placeholder="Choose a date" formControlName="startDate"
+                    >
+                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                  <ngx-mat-datetime-picker #picker [showSpinners]="true" [showSeconds]="false"
+                                           [stepHour]="true" [stepMinute]="true"
+                                           [touchUi]="true" enableMeridian="true">
+                  </ngx-mat-datetime-picker>
+                </mat-form-field>
+
+
+
+              <!--  <input  [ngxTimepicker]="picker">
+                <ngx-material-timepicker #picker [preventOverlayClick]='false'></ngx-material-timepicker>-->
+               <!-- <mat-form-field>
+                    <mat-label>Start Date</mat-label>
+                    <input matInput [matDatepicker]="startDatePicker" formControlName="startDate" [value]="startDate" required>
+                    <mat-datepicker-toggle matSuffix [for]="startDatePicker">
+                      <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+                    </mat-datepicker-toggle>
+                    <mat-datepicker #startDatePicker></mat-datepicker>
+                  </mat-form-field>-->
+              </div>
+            <!--  <div fxLayout="column" >
+&lt;!&ndash;                <input atp-time-picker  (click)="openStartTime()" class="time-clock" [value]="startTime"/>&ndash;&gt;
+                <mat-form-field fxFlex>
+                  <mat-label>Start Time</mat-label>
+                    <input type="time" matInput formControlName="startTime" [value]="startTime" required/>
+
+                </mat-form-field>
+              </div>-->
+          </div>
+
+          <div  fxLayout="row" fxLayoutAlign="space-between center">
+              <div fxLayout="column">
+               <!-- <mat-form-field>
+                    <mat-label>End Date</mat-label>
+                    <input  matInput [matDatepicker]="endDatePicker" formControlName="endDate" required>
+                    <mat-datepicker-toggle matSuffix [for]="endDatePicker">
+                      <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+                    </mat-datepicker-toggle>
+                    <mat-datepicker #endDatePicker></mat-datepicker>
+                  </mat-form-field>
+              </div>
+              <div fxLayout="column">
+&lt;!&ndash;                <input atp-time-picker  (click)="openEndTime()" class="time-clock" [value]="endTime" />&ndash;&gt;
+                <mat-form-field fxFlex>
+                    <mat-label>End Time</mat-label>
+                    <input type="time" matInput formControlName="endTime" [value]="endTime" required/>
+                  </mat-form-field>-->
+                <mat-form-field>
+                <input matInput [ngxMatDatetimePicker]="picker1" placeholder="Choose a date" formControlName="endDate"
+                >
+                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                <ngx-mat-datetime-picker #picker1 [showSpinners]="true" [showSeconds]="false"
+                                         [stepHour]="true" [stepMinute]="true"
+                                         [touchUi]="true" enableMeridian="true" >
+                </ngx-mat-datetime-picker>
+                </mat-form-field>
+              </div>
+
+          </div>
+          <!-- <div fxLayout="row" >
+            <mat-form-field fxFlex>
+              <mat-label>End Time</mat-label>
+              <input matInput formControlName="endTime" />
+            </mat-form-field>
+          </div> -->
+      <!--    <div  fxLayout="row" >
+            <mat-form-field fxFlex>
+              <mat-label>Assignee</mat-label>
+              <input matInput formControlName="assignee" (click)="selectEmployee()"/>
+            </mat-form-field>
+          </div>-->
+      <div fxLayout="row" fxLayoutAlign="space-between center" fxFlex>
+        <mat-form-field fxFlex>
+          <mat-label>Employee</mat-label>
+          <mat-select disableOptionCentering single formControlName="assignee">
+            <mat-option *ngFor="let employee of employees" [value]="employee">
+              {{ employee.firstName +' ' + employee.lastName}}
+            </mat-option>
+          </mat-select>
+
+        </mat-form-field>
+
+    </div>
+          <div  fxLayout="row" >
+            <mat-form-field fxFlex style="max-height: 60px; overflow: auto;">
+              <mat-label>Description</mat-label>
+              <textarea matInput formControlName="description"></textarea>
+            </mat-form-field>
+          </div>
+          <button mat-button (click)="saveEvent()">Save</button>
+          <button mat-button mat-dialog-close>Cancel</button>
+    </div>
+</form>

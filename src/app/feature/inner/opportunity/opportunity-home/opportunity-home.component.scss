@@ -1,0 +1,35 @@
+.custom-table-container {
+  position: relative;
+  overflow: auto;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+.custom-table {
+  width: 100%;
+}
+.search-bar{
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+.mat-search{
+  width: 40%;
+}
+.btn-opty-create{
+  height: 40px !important;
+}
+.navigation{
+  cursor: pointer;
+  color: blue;
+
+}
+.navigation:hover{
+  cursor: pointer;
+  color: green;
+  background-color:#e7e7e7;
+}
+
+.custom-table-container{
+  background-color: #f2f0f0;
+
+}

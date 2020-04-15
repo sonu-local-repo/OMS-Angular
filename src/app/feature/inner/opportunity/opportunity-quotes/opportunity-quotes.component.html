@@ -1,0 +1,115 @@
+<ngx-spinner></ngx-spinner>
+
+
+
+
+<div *ngIf="quoteList" class="contact-table">
+
+<!--  <div style="margin-left: 10px;">
+    <button
+      mat-stroked-button
+      [disabled]="selectedIsEmpty"
+      (click)="openScheduler()"
+    >
+      <mat-icon>schedule</mat-icon> Schedule
+    </button>
+  </div>-->
+
+  <table mat-table [dataSource]="quoteList" class="custom-table" matSort matSortActive="id" matSortDisableClear
+         matSortDirection="desc">
+
+    <ng-container matColumnDef="select">
+      <th mat-header-cell *matHeaderCellDef>
+        <mat-checkbox
+          (change)="$event ? masterToggle():null"
+          [checked]="selection.hasValue() && isAllSelected()"
+          [indeterminate]="selection.hasValue() && !isAllSelected()"
+          [aria-label]="checkboxLabel()"
+        >
+        </mat-checkbox>
+      </th>
+      <td mat-cell *matCellDef="let row">
+        <mat-checkbox
+          (click)="$event.stopPropagation()"
+          (change)="$event ? selection.toggle(row) : null"
+          [checked]="selection.isSelected(row)"
+          [aria-label]="checkboxLabel(row)"
+        >
+        </mat-checkbox>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+      <td  mat-cell *matCellDef="let quote" >{{quote.id}}</td>
+    </ng-container>
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>TYPE</th>
+      <td mat-cell *matCellDef="let quote">{{quote.type}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="source">
+      <th mat-header-cell *matHeaderCellDef fxHide fxShow.gt-xs>STATUS</th>
+      <td mat-cell *matCellDef="let quote" fxHide fxShow.gt-xs>{{quote.status}}</td>
+    </ng-container>
+    <ng-container matColumnDef="dueDate">
+      <th mat-header-cell *matHeaderCellDef fxHide fxShow.gt-xs>SOURCE</th>
+      <td mat-cell *matCellDef="let quote" fxHide fxShow.gt-xs>{{quote.source }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="type">
+      <th mat-header-cell *matHeaderCellDef fxHide fxShow.gt-xs>RATE</th>
+      <td mat-cell *matCellDef="let quote" fxHide fxShow.gt-xs>{{quote.rate}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>STATUS</th>
+      <td mat-cell *matCellDef="let quote">{{quote.status}}</td>
+    </ng-container>
+    <ng-container matColumnDef="createdAt">
+      <th mat-header-cell *matHeaderCellDef fxHide fxShow.gt-xs>CREATED DATE</th>
+      <td mat-cell *matCellDef="let quote" fxHide fxShow.gt-xs>{{quote.createdAt | date}}</td>
+    </ng-container>
+    <ng-container matColumnDef="schedulerId">
+    <th mat-header-cell *matHeaderCellDef fxHide fxShow.gt-xs>SCHEDULER ID</th>
+    <td mat-cell *matCellDef="let quote" fxHide fxShow.gt-xs>{{quote.scheduler ? quote.scheduler.id : ''}}</td>
+  </ng-container>
+    <ng-container matColumnDef="schedulerStartDt">
+      <th mat-header-cell *matHeaderCellDef fxHide fxShow.gt-xs>SCHEDULER START DT</th>
+      <td mat-cell *matCellDef="let quote" fxHide fxShow.gt-xs>{{quote.scheduler? (quote.scheduler.start | date:'medium'): ''}}</td>
+    </ng-container>
+    <ng-container matColumnDef="schedulerEndDt">
+      <th mat-header-cell *matHeaderCellDef fxHide fxShow.gt-xs>SCHEDULER END DT</th>
+      <td mat-cell *matCellDef="let quote" fxHide fxShow.gt-xs>{{quote.scheduler? (quote.scheduler.end| date:'medium') : ''}}</td>
+    </ng-container>
+    <ng-container matColumnDef="assignedTo">
+      <th mat-header-cell *matHeaderCellDef fxHide fxShow.gt-xs>ASSIGNED TO</th>
+      <td mat-cell *matCellDef="let quote" fxHide fxShow.gt-xs >{{quote.scheduler ?(quote.scheduler.employee.firstName +' '+quote.scheduler.employee.lastName):''}}</td>
+    </ng-container>
+    <ng-container matColumnDef="description">
+      <th mat-header-cell *matHeaderCellDef fxHide fxShow.gt-xs>DESCRIPTION</th>
+
+      <td mat-cell *matCellDef="let contact" class="cell-des"fxHide fxShow.gt-xs (click)="openDescription(contact.description)">{{contact.description.substring(0,25)}}...
+
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef>Schedule</th>
+      <td mat-cell *matCellDef="let contact" >
+
+      <button color = 'accent'
+        mat-stroked-button
+
+        (click)="openScheduler(contact)"
+      >
+        <mat-icon>schedule</mat-icon>
+      </button>
+
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true">
+    </tr>
+    <tr mat-row class="order-row" *matRowDef="let row; columns: displayedColumns;">
+    </tr>
+  </table>
+</div>

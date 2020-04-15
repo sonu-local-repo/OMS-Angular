@@ -1,0 +1,32 @@
+<mat-toolbar color="primary">
+  <div  class="navigation" fxLayout="row" >
+    <div fxLayout="column" fxLayoutAlign="end"><span>{{brandName}}</span></div>
+    <div fxLayout="row" fxLayoutAlign="end center"  class="navigation">
+    <div fxLayout="column">
+      <a mat-button routerLink="/opportunity">OPPORTUNITY</a>
+    </div>
+      <div fxLayout="column">
+        <a mat-button routerLink="/calender">CALENDER</a>
+      </div>
+    <div fxLayout="column">
+      <mat-menu #appMenu="matMenu" >
+        <button mat-menu-item>Signed in as SONU </button>
+        <button mat-menu-item  (click)="logout()"> <mat-icon color="accent">power_settings_new</mat-icon>Logout</button>
+      </mat-menu>
+      <button mat-icon-button [matMenuTriggerFor]="appMenu">
+        <mat-icon>account_box</mat-icon>
+      </button>
+    </div>
+    </div>
+  </div>
+</mat-toolbar>
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav-content>
+    <router-outlet></router-outlet>
+    <!--<app-something-went-wrong
+      *ngIf="somethingWentWrong"
+    ></app-something-went-wrong>-->
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
+
